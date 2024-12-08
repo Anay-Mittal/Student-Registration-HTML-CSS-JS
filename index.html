@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .section-header {
+            background-color: #f0f0f0;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ddd;
+        }
+        .section-header h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+        .section-content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+        .section-content.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .fornew {
+            display: flex;
+            gap: 10px;
+        }
+        .fornew input,
+        .fornew select {
+            flex: 1;
+        }
+        .half-width {
+            width: 48%;
+        }
+        .full-width {
+            width: 100%;
+        }
+        .test{
+            display: block;
+            width: 100%;
+        }
+        .fornew2{
+            display: flex;
+            justify-content: space-between;
+        }
+        .fnew{
+            display:flex; 
+        }
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: #fcfcfc;
+}
+
+.btncontainer {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: #fcfcfc;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+  width: 600px;
+  height: 260px;
+  background-color: #ffffff;
+  padding: 10px 30px 40px;
+}
+
+.card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  
+}
+
+.drop_box {
+  margin: 10px 0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px dotted #a3a3a3;
+  border-radius: 5px;
+}
+
+.drop_box h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2e2e2e;
+}
+
+.drop_box p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #a3a3a3;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: #005af0;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.btn:hover{
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #005af0;
+  padding: 10px 20px;
+  border: none;
+  outline: 1px solid #010101;
+}
+.form input {
+  margin: 10px 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+}
+
+
+    </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer>
+    </script>
+</head>
+<body>
+    <form id="myForm">
+    <div class="form-container">
+        <div class="form-header">
+            <h1 style="text-align: center;">STUDENT REGISTRATION FORM</h1>
+            <h3 style="text-align: center;">Anay Mittal, CS1, 036</h3> <br> <br>      
+        </div>
+        <div class="section-wrapper">
+            <div class="section-header" id="basicInfoToggle">
+                <h2>Basic Information</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toggle-icon">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <div id="basicInfoSection" class="section-content">
+                <form id="studentRegistrationForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <div class="fornew">
+                            <input type="text" placeholder="First Name" class="half-width" required>
+                            <input type="text" placeholder="Middle Name" class="half-width" required>
+                            <input type="text" placeholder="Last Name" class="half-width" required>
+                        </div>
+                    </div><br>
+
+                    <div class="fornew2">
+                        <div class="form-group">
+                            <label>Student Number</label>
+                                <div class="test">
+                                    <input type="tel" placeholder="0000" required>
+                                    <sub>Please enter valid Number</sub>
+                                </div><br>
+                        </div>
+                        <div class="form-group">
+                            <label>Year Level</label>
+                            <div class="test">
+                                <select class="full-width" required>
+                                    <option value="">please select</option>
+                                    <option value="1">Academic Year : AY '22 - '26</option>
+                                    <option value="2">Academic Year : AY '23 - '27</option>
+                                    <option value="3">Academic Year : AY '24 - '28</option>
+                                    <option value="4">Academic Year : AY '25 - '29</option>
+                                </select><sub>For Example : AY '23-24</sub>
+                            </div>
+                        </div>
+                        </div><br>
+
+                    <div class="fornew2">
+                        <div class="form-group">
+                            <label>Email</label>
+                                <div class="test">
+                                    <input type="email" placeholder="example@example.com" required>
+                                    <sub>Please enter valid email-id</sub>
+                                </div><br>
+                        </div>
+                        <div class="form-group">
+                            <label>Degree Program</label>
+                            <div class="test">
+                                <select class="full-width" required>
+                                    <option value="">please select</option>
+                                    <option value="cs">Computer Science</option>
+                                    <option value="ms">Mechanical Studies</option>
+                                    <option value="bs">Business Studies</option>
+                                </select><sub>For Example : Computer Science</sub>
+                            </div>
+                        </div>
+                        </div><br>
+
+
+                    <div class="fornew2">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                                <div class="test">
+                                    <input type="text" placeholder="0000" required>
+                                    <sub>Please enter valid number</sub>
+                                </div><br>
+                        </div>
+                        <div class="form-group">
+                            <label>Network Provider</label>
+                            <div class="test">
+                                <select class="full-width">
+                                    <option value="">please select</option>
+                                    <option value="Idea">Network Provider : Idea</option>
+                                    <option value="Airtel">Network Provider : Airtel</option>
+                                    <option value="Jio">Network Provider : Jio</option>
+                                </select><sub>For Example: Airtel, Jio, etc.</sub>
+                            </div>
+                        </div>
+                        </div><br>
+
+
+
+                    <div class="form-group">
+                        <label>Birth Date</label>
+                        <div class="fornew">
+                            <div class="test">
+                            <select placeholder="Month" required>
+                                <option value="">Please select a month</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <sub>Month</sub>
+                            </div>
+                            <div class="test">
+                            <select placeholder="Day" required>
+                                <option value="">Please select a day</option>
+                                <option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                                <option value="7">07</option>
+                                <option value="8">08</option>
+                                <option value="9">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <sub>Day</sub>
+                            </div>
+                            <div class="test">
+                            <select placeholder="Year" required>
+                                <option value="">Please select a year</option>
+                                <option value="2000">2000</option>
+                                <option value="2001">2001</option>
+                                <option value="2002">2002</option>
+                                <option value="2003">2003</option>
+                                <option value="2004">2004</option>
+                            </select>
+                            <sub>Year</sub>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Best-->
+                    <div class="form-group">
+                        <label>Present Address</label>
+                        <input type="text" placeholder="" required>
+                        <sub>Street Address</sub><br><br>
+                        <input type="text" placeholder="" required>
+                        <sub>Street Address Line 2</sub><br><br>
+                    <div class="fornew">
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>City</sub>
+                        </div>
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>State / Province</sub>
+                        </div>
+                    </div> <br>
+                    <div class="fornew">
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>Postal / Zip Code</sub>
+                        </div><br>
+                        <div class="test">
+                            <select placeholder="Choose" required>
+                                <option value="">Choose a Country</option>
+                                <option value="1">India</option>
+                                <option value="2">Japan</option>
+                                <option value="3">USA</option>
+                                <option Value="4">China</option>
+                            </select>
+                            <sub>Country</sub>
+                        </div><br>
+                    </div><br>
+                    
+                    </div>
+                    <div class="form-group">
+                        <label>Permanent Address</label>
+                        <input type="text" placeholder="" required>
+                        <sub>Street Address</sub><br><br>
+                        <input type="text" placeholder="" required>
+                        <sub>Street Address Line 2</sub><br><br>
+                    <div class="fornew">
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>City</sub>
+                        </div>
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>State / Province</sub>
+                        </div>
+                    </div> <br>
+                    <div class="fornew">
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>Postal / Zip Code</sub>
+                        </div><br>
+                        <div class="test">
+                            <select placeholder="Choose" required>
+                                <option value="">Choose a Country</option>
+                                <option value="1">India</option>
+                                <option value="2">Japan</option>
+                                <option value="3">USA</option>
+                                <option Value="4">China</option>
+                            </select>
+                            <sub>Country</sub>
+                        </div><br>
+                    </div><br>
+                    
+                    </div>
+
+
+                    <div class="fornew">
+                    <div class="form-group">
+                        <label>Emergency Contact</label>
+                        <div class="fornew">
+                            <div class="test">
+                                <input type="text" placeholder="" required>
+                                <sub>First Name</sub>
+                            </div><br>
+                            <div class="test">
+                                <input type="text" placeholder="" required>
+                                <sub>Last Name</sub>
+                            </div><br>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Relationship</label>
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>ex. Father, Mother.</sub>
+                        </div>
+                    </div>
+                    </div><br>
+
+                    <div class="form-group">
+                        <label>Address of a person to contact in case of emergency</label>
+                        <input type="text" placeholder="" required>
+                        <sub>Street Address</sub><br><br>
+                        <input type="text" placeholder="" required>
+                        <sub>Street Address Line 2</sub><br><br>
+                    <div class="fornew">
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>City</sub>
+                        </div>
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>State / Province</sub>
+                        </div>
+                    </div> <br>
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>Postal / Zip Code</sub>
+                        </div><br>
+                        <br>
+                    
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone number of a person to contact in case of emergency</label>
+                        <div class="test">
+                            <input type="text" placeholder="(000)-0000-000" required>
+                            <sub>Please enter valid number</sub>
+                        </div>
+                    </div><br>
+
+                    <div class="form-group">
+                        <label>Email of a person to contact in case of emergency</label>
+                        <div class="test">
+                            <input type="text" placeholder="" required>
+                            <sub>example@example.com</sub>
+                        </div>
+                    </div>
+                    
+
+
+
+                </form>
+            </div>
+        </div>
+        <div class="section-wrapper">
+            <div class="section-header" id="contactInfoToggle">
+                <h2>Academic Background</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toggle-icon">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+        <div id="contactInfoSection" class="section-content">
+            <form id="contactRegistrationForm">
+                <div class="form-group">
+                    <label>High School Name</label>
+                    <input type="text" placeholder="" required>
+                </div><br>
+                
+                <div class="form-group">
+                    <label>Curriculum Vitae or List of Achievements</label><br>
+                    <div class="container">
+                        <div class="card">
+                          <h3>Upload Files</h3>
+                          <div class="drop_box">
+                            <header>
+                              <h4>Select File here</h4>
+                            </header>
+                            <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
+                            <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
+                            <button class="btn">Choose File</button>
+                          </div><sub>File should be in pdf, doc/docx format.</sub>
+                      
+                        </div>
+                      </div>
+                </div><br>
+
+                <div class="form-group">
+                    <label>Other Extracurricular Activities</label>
+                    <input type="text" placeholder="" required>
+                </div><br>
+                <div class="form-group">
+                    <label>Extra Curricular Participation</label></div>
+                    <div class="fornew">
+                    <div class="test">
+                    <div class="flex">
+                        <input type="checkbox" id="sc">
+                        <label for="sc">Student Council</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="cl">
+                        <label for="cl">Club / Organization</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="oth">
+                        <label for="oth">Others (Please Specify)</label>
+                    </div><br>
+                    </div>
+                    <div class="test">
+                        <div class="flex">
+                            <input type="checkbox" id="off">
+                            <label for="off">Class Officer</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="va">
+                            <label for="va">Varsity Player</label>
+                        </div>
+                    </div>
+                    </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="section-wrapper">
+        <div class="section-header" id="otherInfoToggle">
+            <h2>Other Details</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toggle-icon">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    <div id="otherInfoSection" class="section-content">
+        <form id="contactRegistrationForm">
+                <label><h4>Resources Available</h4></label><br>
+                <div class="fornew">
+                <div class="test">
+                <div class="flex">
+                    <input type="checkbox" id="car">
+                    <label for="car">Car/Transportaion</label>
+                </div><br>
+                <div class="flex">
+                    <input type="checkbox" id="printer">
+                    <label for="printer">Printer</label>
+                </div><br>
+                <div class="flex">
+                    <input type="checkbox" id="laptop">
+                    <label for="laptop">Laptop</label>
+                </div><br>
+                </div>
+                <div class="test">
+                    <div class="flex">
+                        <input type="checkbox" id="eve">
+                        <label for="eve">Event Venue/House</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="lcd">
+                        <label for="lcd">LCD Projector</label>
+                    </div>
+                </div>
+                </div>
+                <br>
+                    <label><h4>Skills / Talents</h4></label><br>
+                    <div class="fornew">
+                    <div class="test">
+                    <div class="flex">
+                        <input type="checkbox" id="act">
+                        <label for="act">Acting</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="cal">
+                        <label for="cal">Calculating</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="deba">
+                        <label for="deba">Debating</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="eat">
+                        <label for="eat">Eating</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="photo">
+                        <label for="photo">Photographer</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="guitar">
+                        <label for="guitar">Guitar</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="prog">
+                        <label for="prog">Programming</label>
+                    </div><br>
+                    <div class="flex">
+                        <input type="checkbox" id="writ">
+                        <label for="writ">Writing</label>
+                    </div><br>
+                    
+                    </div>
+                    <div class="test">
+                        <div class="flex">
+                            <input type="checkbox" id="art">
+                            <label for="art">Arts/Crafts</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="dancing">
+                            <label for="dancing">Dancing</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="Drawing">
+                            <label for="Drawing">Drawing</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="fas">
+                            <label for="fas">Fashion</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="Dr">
+                            <label for="Dr">Drums</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="pia">
+                            <label for="pia">Piano</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="sing">
+                            <label for="sing">Singing</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="o">
+                            <label for="o">Other</label>
+                        </div><br>
+                    </div>
+                    </div><br>
+                        <label><h4>Sports</h4></label><br>
+                        <div class="fornew">
+                        <div class="test">
+                        <div class="flex">
+                            <input type="checkbox" id="bad">
+                            <label for="bad">Badminton</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="bowl">
+                            <label for="bowl">Bowling</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="frisbee">
+                            <label for="frisbee">Frisbee</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="socc">
+                            <label for="socc">Soccer</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="swim">
+                            <label for="swim">Swimming</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="track">
+                            <label for="track">Track & Field</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="voley">
+                            <label for="voley">Volleyball</label>
+                        </div><br>
+                        <div class="flex">
+                            <input type="checkbox" id="basketball">
+                            <label for="basketball">Basketball</label>
+                        </div><br>
+                        
+                        </div>
+                        <div class="test">
+                            <div class="flex">
+                                <input type="checkbox" id="chess">
+                                <label for="chess">Chess</label>
+                            </div><br>
+                            <div class="flex">
+                                <input type="checkbox" id="scra">
+                                <label for="scra">Scrabble</label>
+                            </div><br>
+                            <div class="flex">
+                                <input type="checkbox" id="soft">
+                                <label for="soft">Softball</label>
+                            </div><br>
+                            <div class="flex">
+                                <input type="checkbox" id="tt">
+                                <label for="tt">Table Tennis</label>
+                            </div><br>
+                            <div class="flex">
+                                <input type="checkbox" id="tennis">
+                                <label for="tennis">Tennis</label>
+                            </div><br>
+                            <div class="flex">
+                                <input type="checkbox" id="other">
+                                <label for="other">Other</label>
+                            </div><br>
+                        </div>
+                        </div><br>
+                    <div class="form-group">
+                        <label for="interest">Interests</label>
+                        <textarea rows="10" cols="98"></textarea>
+                    </div><br>
+                    <div class="form-group">
+                        <label>Estimate your family income</label>
+                        <select placeholder="Choose" required class="half-width">
+                            <option value="">Please Select</option>
+                            <option value="100000">100000</option>
+                            <option value="2100000">2100000</option>
+                            <option value="32100000">32100000</option>
+                        </select>
+                    </div><br>
+                    <label><h4>Do you have any scholarship?</h4></label><br>
+                    <div class="fornew">
+                    <div class="test">
+                    <div class="flex">
+                        <input type="radio" id="Y">
+                        <label for="Y">Yes</label>
+                    </div><br>
+                    </div>
+                    <div class="test">
+                        <div class="flex">
+                            <input type="radio" id="N">
+                            <label for="N">No</label>
+                        </div><br>
+                    </div>
+                    </div><br>
+
+                    <label><h4>Do you plan to shift to another course?</h4></label><br>
+                    <div class="fornew">
+                    <div class="test">
+                    <div class="flex">
+                        <input type="radio" id="Y">
+                        <label for="Y">Yes</label>
+                    </div><br>
+                    </div>
+                    <div class="test">
+                        <div class="flex">
+                            <input type="radio" id="N">
+                            <label for="N">No</label>
+                        </div><br>
+                    </div>
+                    </div><br>
+                <div class="form-group">
+                    <label>What course is your First Choice in the University?</label>
+                    <input type="text" required><br>
+                    <select placeholder="Please Select">
+                        <option value="">Please Select</option>
+                    </select>
+                </div>     <br><br>
+                <div class="form-group">
+                    <label for="suggestion">Suggestions / Comments</label>
+                    <textarea rows="10" cols="98"></textarea>
+                </div><br>  
+                
+                
+                <div
+                class="g-recaptcha"
+                data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              >
+              </div>  
+        </form>
+    </div>
+    </div><br>
+    <hr>
+    <div class="btncontainer">
+        <div class="btn" onclick="printForm()">Print Form</div>
+        <div class="btn" onclick="submitForm()">Submit</div>
+    </div>
+</form>
+<script>
+    function printForm() {
+        window.print();
+    }
+
+    function submitForm() {
+        const form = document.getElementById('myForm');
+        const fields = form.querySelectorAll('input[required]');
+        
+        // Check if all required fields are filled
+        const allFieldsFilled = Array.from(fields).every(field => field.value.trim() !== '');
+        
+        if (allFieldsFilled) {
+            // Proceed with form submission
+            alert('Form submitted successfully!');
+            // You can add your actual form submission logic here
+            // form.submit();
+        } else {
+            alert('Please fill in all required fields.');
+        }
+    }
+</script>
+    <hr>
+    <a href="index.html">Clear Form</a>
+        
+       
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Basic Info Toggle
+            const basicInfoToggle = document.getElementById('basicInfoToggle');
+            const basicInfoSection = document.getElementById('basicInfoSection');
+            const basicToggleIcon = basicInfoToggle.querySelector('.toggle-icon');
+
+            basicInfoToggle.addEventListener('click', function() {
+                basicInfoSection.classList.toggle('active');
+                basicToggleIcon.classList.toggle('rotated');
+            });
+
+            // Contact Info Toggle
+            const contactInfoToggle = document.getElementById('contactInfoToggle');
+            const contactInfoSection = document.getElementById('contactInfoSection');
+            const contactToggleIcon = contactInfoToggle.querySelector('.toggle-icon');
+
+            contactInfoToggle.addEventListener('click', function() {
+                contactInfoSection.classList.toggle('active');
+                contactToggleIcon.classList.toggle('rotated');
+            });
+
+            const otherInfoToggle = document.getElementById('otherInfoToggle');
+            const otherInfoSection = document.getElementById('otherInfoSection');
+            const otherToggleIcon = otherInfoToggle.querySelector('.toggle-icon');
+
+            otherInfoToggle.addEventListener('click', function() {
+                otherInfoSection.classList.toggle('active');
+                otherToggleIcon.classList.toggle('rotated');
+            });
+
+            const dropArea = document.querySelector(".drop_box"),
+  button = dropArea.querySelector("button"),
+  dragText = dropArea.querySelector("header"),
+  input = dropArea.querySelector("input");
+let file;
+var filename;
+
+button.onclick = () => {
+  input.click();
+};
+
+input.addEventListener("change", function (e) {
+  var fileName = e.target.files[0].name;
+  let filedata = `
+    <form action="" method="post">
+    <div class="form">
+    <h4>${fileName}</h4>
+    <input type="email" placeholder="Enter email upload file">
+    <button class="btn">Upload</button>
+    </div>
+    </form>`;
+  dropArea.innerHTML = filedata;
+});
+
+        });
+    </script>
+</body>
+</html>
